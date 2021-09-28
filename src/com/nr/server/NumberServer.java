@@ -5,22 +5,25 @@ import java.util.TimerTask;
 
 public class NumberServer {
 
+    private Timer timer;
+
     public void connect() {
-        Input input = new Input();
-        Timer timer = new Timer();
-        new CreateServer(4000, input, timer).start();
+        timer = new Timer();
+        new CreateServer(new Input(), timer).start();
+    }
+
+    private void output() {
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                System.out.println("Hello World");
+                System.out.println("Received 50 unique numbers, 2 duplicates. Unique total:567231");
             }
-        }, 0, 5000);
+        }, 0, 10000);
     }
-
-
 
     public static void main(String[] args) {
         NumberServer server = new NumberServer();
         server.connect();
+        server.output();
     }
 }

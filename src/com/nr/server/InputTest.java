@@ -7,48 +7,44 @@ import static org.junit.jupiter.api.Assertions.*;
 class InputTest {
 
     @Test
-    void validateInput_shouldNotThrowExceptionIfTextIsA9DigitNumber() throws Exception {
+    void isValid_shouldReturnTrueIfTextIsA9DigitNumber() {
         Input input = new Input();
-        input.validate("000456789");
+        assertTrue(input.isValid("000456789"));
     }
 
     @Test
-    void validateInput_shouldNotThrowExceptionIfTextIsA9DigitNumberMultiLine() throws Exception {
+    void isValid_shouldReturnTrueIfTextIsA9DigitNumberMultiLine() {
         Input input = new Input();
-        input.validate("000456789\n000456710");
+        assertTrue(input.isValid("000456789\n000456710"));
     }
 
     @Test
-    void validateInput_shouldNotThrowExceptionIfTextIsEqualToTerminate() throws Exception {
+    void validateInput_shouldReturnTrueIfTextIsEqualToTerminate() {
         Input input = new Input();
-        input.validate("terminate");
+        assertTrue(input.isValid("terminate"));
     }
 
     @Test
-    void validateInput_shouldThrowExceptionIfTextIsInvalid() {
+    void isValid_shouldReturnFalseIfTextIsInvalid() {
         Input input = new Input();
-        assertThrows(Exception.class,
-                ()-> input.validate("terminat"));
+        assertFalse(input.isValid("AAAAAAAAA"));
     }
 
     @Test
-    void validateInput_shouldThrowExceptionIfTextIsANon9DigitNumber() {
+    void isValid_shouldReturnFalseIfTextIsANon9DigitNumber() {
         Input input = new Input();
-        assertThrows(Exception.class,
-                ()-> input.validate("12345"));
+        assertFalse(input.isValid("12345"));
     }
 
     @Test
-    void validateInput_shouldThrowExceptionIfTextIsANon9DigitNumberMultiLine() {
+    void isValid_shouldReturnFalseIfTextIsANon9DigitNumberMultiLine() {
         Input input = new Input();
-        assertThrows(Exception.class,
-                ()-> input.validate("000456789\n00045678"));
+        assertFalse(input.isValid("000456789\n00045678"));
     }
 
     @Test
-    void validateInput_shouldThrowExceptionIfTextIsEmpty() {
+    void isValid_shouldReturnFalseIfTextIsEmpty() {
         Input input = new Input();
-        assertThrows(Exception.class,
-                ()-> input.validate(""));
+        assertFalse(input.isValid(""));
     }
 }
