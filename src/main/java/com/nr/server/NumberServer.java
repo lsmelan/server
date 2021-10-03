@@ -8,19 +8,21 @@ import com.google.common.cache.CacheBuilder;
 import org.apache.commons.lang3.StringUtils;
 
 public class NumberServer {
+    private final Input input;
     private final Timer timer;
     private final Cache<String, String> cache;
     private final Log log;
 
-    public NumberServer() {
-        this.timer = new Timer();
-        this.cache = CacheBuilder.newBuilder().build();
-        this.log = new Log();
+    public NumberServer(Input input, Timer timer, Cache<String, String> cache, Log log) {
+        this.input = input;
+        this.timer = timer;
+        this.cache = cache;
+        this.log = log;
         log.touch();
     }
 
     public void start() {
-        new CreateServer(new Input(), timer, cache).start();
+        new CreateServer(input, timer, cache).start();
     }
 
     private void schedule() {
@@ -46,7 +48,7 @@ public class NumberServer {
     }
 
     public static void main(String[] args) {
-        NumberServer server = new NumberServer();
+        NumberServer server = new NumberServer(new Input(), new Timer(), CacheBuilder.newBuilder().build(), new Log());
         server.start();
         server.schedule();
     }
