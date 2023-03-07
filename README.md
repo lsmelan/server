@@ -1,2 +1,2 @@
 # server
-New Relic - Technical Challenge
+Technical Challenge
